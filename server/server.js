@@ -24,9 +24,10 @@ io.on('connection', (socket) => {
   socket.broadcast.emit('newMessage', generateMessage('Admin', 'A new user joined'));
 
   // Event listeners
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, acknowledge) => {
     console.log('createMessage', message);
     io.emit('newMessage', generateMessage(message.from, message.text));
+    acknowledge('Message received!');
   });
 
   socket.on('disconnect', () => {
