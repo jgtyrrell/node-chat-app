@@ -68,10 +68,11 @@ $('#message-form').on('submit', function (event) {
   event.preventDefault();
   var messageTextBox = $('[name=message]');
   socket.emit('createMessage', {
-    from: 'Bill',
     text: messageTextBox.val()
   }, function (acknowledgement) {
-    // console.log(acknowledgement);
+    if (acknowledgement) {
+      alert(acknowledgement);
+    }
     messageTextBox.val('').focus();
   });
 });
